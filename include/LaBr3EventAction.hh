@@ -21,20 +21,15 @@ class LaBr3EventAction : public G4UserEventAction{
 		virtual void  BeginOfEventAction(const G4Event *event);
 		virtual void    EndOfEventAction(const G4Event *event);
 
-		void Sumstep_EnergyDeposit(int i, G4double stepEdep);
+		void Sumstep_EnergyDeposit(int i, G4double stepEdep, G4double time);
 
 	private:
 		//LaBr3RunAction *fRunAction;
 		G4double fEventEdep[12];
-		//G4int fCollID_cryst;
-		//G4int fCollID_patient;   
+		G4double fTime0;
 };
 
-inline void LaBr3EventAction::Sumstep_EnergyDeposit(int i, G4double stepEdep){
 
-	fEventEdep[i]+=stepEdep;
-
-}
 
 
 

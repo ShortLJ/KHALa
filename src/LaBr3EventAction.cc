@@ -24,8 +24,21 @@ void LaBr3EventAction::BeginOfEventAction(const G4Event* /*evt*/){
 	for(int i=0; i<12; i++){
 		fEventEdep[i] = 0.;
 	}
+	fTime0 = -1.*s;
 }
 
+void LaBr3EventAction::Sumstep_EnergyDeposit(int i, G4double stepEdep, G4double time){
+
+	// initialize t0
+	if (fTime0 < 0.) fTime0 = time;
+
+	// out of time window ?
+	const G4double TimeWindow (400.*ns);
+	if (std::fabs(time - fTime0) > TimeWindow) return;
+
+	fEventEdep[i]+=stepEdep;
+
+}
 
 void LaBr3EventAction::EndOfEventAction(const G4Event* event){
 

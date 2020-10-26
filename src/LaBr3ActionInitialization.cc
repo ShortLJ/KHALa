@@ -5,7 +5,6 @@
 #include "LaBr3SteppingAction.hh"
 #include "LaBr3DetectorConstruction.hh"
 
-//#include "LaBr3StackingAction.hh"
 
 
 LaBr3ActionInitialization::LaBr3ActionInitialization(LaBr3DetectorConstruction *detConstruction):G4VUserActionInitialization(),fDetConstruction(detConstruction)

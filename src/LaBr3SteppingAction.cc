@@ -21,6 +21,7 @@ void LaBr3SteppingAction::UserSteppingAction(const G4Step *step){
 	G4int eventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
 	G4int volumeID = step->GetPreStepPoint()->GetPhysicalVolume()->GetCopyNo();
 	G4double stepEdep = step->GetTotalEnergyDeposit();
+	G4double time = step->GetPreStepPoint()->GetGlobalTime();
 
 	G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 	analysisManager->FillNtupleIColumn(0, 0, eventID);
@@ -28,7 +29,7 @@ void LaBr3SteppingAction::UserSteppingAction(const G4Step *step){
 	analysisManager->FillNtupleDColumn(0, 2, stepEdep);
 	analysisManager->AddNtupleRow(0);
 
-	if(100<=volumeID && volumeID<112 ) fEventAction->Sumstep_EnergyDeposit(volumeID-100 ,stepEdep);
+	if(100<=volumeID && volumeID<112 ) fEventAction->Sumstep_EnergyDeposit(volumeID-100 ,stepEdep, time);
 
 
 }
