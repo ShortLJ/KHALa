@@ -11,7 +11,7 @@
 #include "G4SystemOfUnits.hh"
 #include "g4root.hh"
 
-LaBr3EventAction::LaBr3EventAction(LaBr3RunAction *runAction):G4UserEventAction(),fEventEdep(0.)
+LaBr3EventAction::LaBr3EventAction(LaBr3RunAction *runAction):G4UserEventAction(),fEventEdep()
 { }
 
 
@@ -21,16 +21,19 @@ LaBr3EventAction::~LaBr3EventAction()
 
 void LaBr3EventAction::BeginOfEventAction(const G4Event* /*evt*/){ 
 
-	fEventEdep = 0.;
-
+	for(int i=0; i<12; i++){
+		fEventEdep[i] = 0.;
+	}
 }
 
 
 void LaBr3EventAction::EndOfEventAction(const G4Event* event){
 
 	G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
-	if(fEventEdep>100*keV)	analysisManager->FillH1(0, fEventEdep);
-	analysisManager->FillNtupleDColumn(1, 0, fEventEdep);
+	for(int i=0; i<12; i++){
+		analysisManager->FillNtupleDColumn(1, i, fEventEdep[i]);
+		if(fEventEdep[i]> 50*keV)	analysisManager->FillH1(0, fEventEdep[i]);
+	}
 	analysisManager->AddNtupleRow(1);
 
 

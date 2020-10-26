@@ -29,7 +29,24 @@ LaBr3RunAction::LaBr3RunAction():G4UserRunAction(){
 	analysisManager->FinishNtuple();
 
 	analysisManager->CreateNtuple("Event", "Event");
-	analysisManager->CreateNtupleDColumn("EventEdep");
+	//for(int i=0; i<12; i++){
+	//	G4String columnName = Form("EventEdep%2d",i);
+	//	analysisManager->CreateNtupleDColumn(1, columnName);
+		//analysisManager->CreateNtupleDColumn(1,G4String(Form("EventEdep%2d",i)));
+		//analysisManager->CreateNtupleDColumn(1,Form("EventEdep%2d",i));
+	//}
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep00");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep01");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep02");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep03");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep04");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep05");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep06");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep07");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep08");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep09");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep10");
+	analysisManager->CreateNtupleDColumn( 1,"EventEdep11");
 	analysisManager->FinishNtuple();
 
 

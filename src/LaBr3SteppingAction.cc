@@ -28,7 +28,7 @@ void LaBr3SteppingAction::UserSteppingAction(const G4Step *step){
 	analysisManager->FillNtupleDColumn(0, 2, stepEdep);
 	analysisManager->AddNtupleRow(0);
 
-	if(volumeID==100) fEventAction->Sumstep_EnergyDeposit(stepEdep);
+	if(100<=volumeID && volumeID<112 ) fEventAction->Sumstep_EnergyDeposit(volumeID-100 ,stepEdep);
 
 
 }

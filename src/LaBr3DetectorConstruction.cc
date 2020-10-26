@@ -107,17 +107,22 @@ G4VPhysicalVolume *LaBr3DetectorConstruction::DefineVolumes(){
 					Detector_mat,
 					"Detector_logic"	);
 
-	G4RotationMatrix *yRot = new G4RotationMatrix; // Rotates X and Z axes only
-	yRot->rotateY(M_PI/2.*rad);  
-	//G4PhysicalVolume *physDetector =
-		new G4PVPlacement(	yRot, G4ThreeVector(10*cm+0.5*1.5*inch, 0., 0.),
-					logicDetector,
-					"Detector_phys",
-					logicWorld,
-					false,
-					100+0,
-					fCheckOverlaps	);
-
+	G4ThreeVector position0;
+	G4RotationMatrix *yRot[12]; // Rotates X and Z axes only
+	for(int i=0; i<12; i++){
+		position0 = G4ThreeVector((10.*cm+0.5*1.5*inch), 0., 0.);
+		yRot[i] = new G4RotationMatrix; // Rotates X and Z axes only
+		yRot[i]->rotateY((M_PI/2.)*rad);  
+		yRot[i]->rotateZ(((double)i*M_PI/6.)*rad);  
+		//G4PhysicalVolume *physDetector =
+			new G4PVPlacement(	G4Transform3D(*yRot[i], position0.rotateZ((double)i*M_PI/6.*rad)),
+						logicDetector,
+						"Detector_phys",
+						logicWorld,
+						false,
+						100+i,
+						fCheckOverlaps	);
+	}
 
 	logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 	//G4VisAttributes *VisAtt = new G4VisAttributes();

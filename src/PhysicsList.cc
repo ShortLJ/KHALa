@@ -80,7 +80,8 @@ PhysicsList::PhysicsList()
   // Mandatory for G4NuclideTable
   // Half-life threshold must be set small or many short-lived isomers 
   // will not be assigned life times (default to 0) 
-  G4NuclideTable::GetInstance()->SetThresholdOfHalfLife(0.1*picosecond);
+  G4NuclideTable::GetInstance()->SetThresholdOfHalfLife(10000.*picosecond);
+  //G4NuclideTable::GetInstance()->SetThresholdOfHalfLife(0.1*picosecond);
   G4NuclideTable::GetInstance()->SetLevelTolerance(1.0*eV);
           
   // EM physics
