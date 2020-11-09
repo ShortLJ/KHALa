@@ -48,6 +48,8 @@ set(EXAMPLELaBr3_SCRIPTS
   run2.mac
   runLJ.mac
   vis.mac
+  histogram.c
+  condor.sh
   )
 
 foreach(_script ${EXAMPLELaBr3_SCRIPTS})

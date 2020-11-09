@@ -15,7 +15,24 @@ LaBr3RunAction::LaBr3RunAction():G4UserRunAction(){
 
 	G4RunManager::GetRunManager()->SetPrintProgress(1);
 
+
+
+}
+
+LaBr3RunAction::~LaBr3RunAction(){
+	delete G4AnalysisManager::Instance();
+}
+
+
+void LaBr3RunAction::BeginOfRunAction(const G4Run *run){ 
+
+	G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
+
 	G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+	//G4String filename = "LaBr3_geant4_test";
+	//analysisManager->OpenFile(filename);
+
+	analysisManager->OpenFile();
 	analysisManager->SetVerboseLevel(1);
 	analysisManager->SetNtupleMerging(true);
 	G4cout << "Using " << analysisManager->GetType() << G4endl;
@@ -23,9 +40,9 @@ LaBr3RunAction::LaBr3RunAction():G4UserRunAction(){
 	analysisManager->CreateH1("E","Edep", 1000, 0., 2000*keV);
 
 	analysisManager->CreateNtuple("step", "step");
-	analysisManager->CreateNtupleIColumn("EventID");
-	analysisManager->CreateNtupleIColumn("VolumeID");
-	analysisManager->CreateNtupleDColumn("StepEdep");
+	analysisManager->CreateNtupleIColumn(0,"EventID");
+	analysisManager->CreateNtupleIColumn(0,"VolumeID");
+	analysisManager->CreateNtupleDColumn(0,"StepEdep");
 	analysisManager->FinishNtuple();
 
 	analysisManager->CreateNtuple("Event", "Event");
@@ -49,23 +66,6 @@ LaBr3RunAction::LaBr3RunAction():G4UserRunAction(){
 	analysisManager->CreateNtupleDColumn( 1,"EventEdep11");
 	analysisManager->FinishNtuple();
 
-
-
-}
-
-LaBr3RunAction::~LaBr3RunAction(){
-	delete G4AnalysisManager::Instance();
-}
-
-
-void LaBr3RunAction::BeginOfRunAction(const G4Run *run){ 
-
-	G4cout << "### Run " << run->GetRunID() << " start." << G4endl;
-
-	G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
-
-	G4String filename = "LaBr3_geant4_test";
-	analysisManager->OpenFile(filename);
 
 }
 
