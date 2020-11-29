@@ -12,7 +12,7 @@
     submit_file << "idir=$dir/../" << endl;
     submit_file << Form("$idir/exampleLaBr3 $idir/runLJ.mac LaBr3_geant4_test_%02d %d", i, i) << endl;
 
-    submit_file << "Requirements = machine =!= \"kunplbond0\"" << endl;
+    submit_file << "Requirements = (Machine != \"nuclear.korea.ac.kr\")" << endl;
     
     submit_macro << "csub " << name << endl;
   }
