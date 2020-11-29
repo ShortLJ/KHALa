@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 		output_file_name="LaBr3_geant4_test";
 		ui = new G4UIExecutive(argc, argv);
 	}
-	if(argc==4){
+	else if(argc==4){
 		output_file_name=argv[2];
 		CLHEP::HepRandom::setTheSeed( (long) atol(argv[3]) );
 	}
